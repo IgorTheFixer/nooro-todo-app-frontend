@@ -14,6 +14,7 @@ const config: Config = {
         customPurple: '#5E60CE',
         appGray: '#1A1A1A',
         headerBlack: '#0D0D0D',
+        customGray: '#808080',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

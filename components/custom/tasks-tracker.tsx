@@ -2,9 +2,10 @@ import { useTaskStore } from "@/hooks/useTaskStore";
 
 export const TasksTracker = () =>{
   const { tasks } = useTaskStore();
-  const completedTasks = useTaskStore((state) => state.tasks.filter((task) => task.completed).length);
+  const completedTasks = tasks.filter((task) => task.completed).length;
 
-  const spanStyle ='bg-[#333333] text-white font-normal text-sm ml-2 rounded-full px-2'
+  const spanStyle =
+  'bg-[#333333] text-white font-normal text-sm ml-2 rounded-full px-2'
   
   return(
     <div className="flex justify-between h-full">
@@ -17,7 +18,7 @@ export const TasksTracker = () =>{
       <p className="text-customPurple font-bold">
         Completed
         <span className={spanStyle}>
-          {completedTasks} of {tasks.length}
+          {tasks.length > 0 ? `${completedTasks} of ${tasks.length}`: "0"}
         </span>
       </p>
     </div> 

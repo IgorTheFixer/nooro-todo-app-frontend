@@ -2,6 +2,7 @@ import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"; 
 import axios from "axios"
 import { Task } from "@/types";
+import toast from "react-hot-toast";
 
 interface TaskStore {
   tasks: Task[];
@@ -30,7 +31,9 @@ export const useTaskStore = create(
       }));
     },
     deleteTask: async ( taskId: string ) => {
-      set({ tasks: [...get().tasks.filter((task) => task.id !== taskId)] });
+      set((state) => ({
+        tasks: state.tasks.filter((task) => task.id !== taskId),
+      }));
 
       try {
         await axios.delete(`/api/tasks/${taskId}`);

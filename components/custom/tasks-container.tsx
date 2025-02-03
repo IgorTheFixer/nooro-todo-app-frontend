@@ -1,19 +1,13 @@
 import { useTaskStore } from "@/hooks/useTaskStore";
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'; 
+import { useEffect } from 'react' 
 import TaskCard from "@/components/custom/task-card";
 
 export const TasksContainer = () => {
   const { tasks, loading, fetchTasks } = useTaskStore();
-  const router = useRouter();
 
   useEffect(() => {
     if (tasks.length === 0) fetchTasks();
   }, [tasks.length, fetchTasks]);
-
-  const handleTaskClick = (taskId: string) => {
-    router.push(`/${taskId}`); 
-  };
 
   return(
     <div className="
@@ -31,15 +25,15 @@ export const TasksContainer = () => {
         <p>Loading...</p>
       ) : tasks.length === 0 ? (
         <>
-          <p>You don't have any tasks registered yet.</p>
-          <p>Create tasks and organize your to-do items</p>
+          <img src="Clipboard.svg" alt="an icon representing a clipboard" className="pt-10 pb-4"/>
+          <p className="text-customGray font-bold">You don't have any tasks registered yet.</p>
+          <p className="text-customGray pt-4">Create tasks and organize your to-do items</p>
         </>
       ) : (
         tasks.map((task) => (
           <TaskCard 
             key={task.id} 
             task={task} 
-            onClick={() => handleTaskClick(task.id)} 
           />
         ))
       )}

@@ -1,22 +1,15 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTaskStore } from "@/hooks/useTaskStore";
-// import { useModal } from "@/hooks/useModal";
+import { useModal } from "@/hooks/useModal";
+import { useRouter } from 'next/navigation';
+import { Task } from "@/types";
 
-interface Task {
-  id: string,
-  title: string,
-  color: string,
-  completed: boolean
-}
-interface TaskCardProps {
-  task: Task
-  onClick: () => void;
-}
 
-const TaskCard = ({ task, onClick }: TaskCardProps) => {
-  // const { onOpen } = useModal();
+const TaskCard = ({ task }:{ task:Task }) => {
+  const { onOpen } = useModal();
   const { updateTask } = useTaskStore();
+  const router = useRouter();
 
   const handleCheckboxClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -24,7 +17,7 @@ const TaskCard = ({ task, onClick }: TaskCardProps) => {
   };
 
   return(
-    <Card onClick={onClick} className="text-white bg-[#262626] border-[#333333] flex justify-between items-center py-4 px-4 w-full h-full">
+    <Card onClick={() => router.push(`/${task.id}`)} className="text-white bg-[#262626] border-[#333333] flex justify-between items-center p-4 w-full h-full">
       <div className="flex justify-center items center">
         <Checkbox 
           className="flex justify-center items center rounded-full mt-1"
@@ -43,7 +36,7 @@ const TaskCard = ({ task, onClick }: TaskCardProps) => {
           className="cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
-            // onOpen("deleteTask", task.id);
+            onOpen("deleteTask", task.id);
           }}
         />
       </CardFooter>
