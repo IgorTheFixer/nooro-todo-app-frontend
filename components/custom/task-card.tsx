@@ -24,14 +24,14 @@ const TaskCard = ({ task, onClick }: TaskCardProps) => {
   };
 
   return(
-    <Card onClick={onClick} className="text-[#F2F2F2] bg-[#262626] border-[#333333] flex justify-between items-center py-4 w-full">
+    <Card onClick={onClick} className="text-white bg-[#262626] border-[#333333] flex justify-between items-center py-4 px-4 w-full h-full">
       <div className="flex justify-center items center">
         <Checkbox 
-          className="flex justify-center items center rounded-full "
+          className="flex justify-center items center rounded-full mt-1"
           onClick={handleCheckboxClick}
         />
         <CardContent 
-          className={`transition-all duration-300 ${task.completed ? "line-through opacity-50" : ""}`}
+          className={`pl-4 transition-all duration-300 ${task.completed ? "line-through opacity-50" : ""}`}
         >
           <p>{task.title}</p>
         </CardContent>
@@ -39,7 +39,7 @@ const TaskCard = ({ task, onClick }: TaskCardProps) => {
       <CardFooter>
         <img 
           src="trash.svg" 
-          alt="trash icon"
+          alt="an icon representing a trashcan"
           className="cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
