@@ -45,7 +45,8 @@ export const useTaskStore = create(
         set({ tasks: response.data, loading: false });
       } catch (error) {
         console.log("Failed to load tasks")
-        set({ loading: false });
+        //TODO: may add loading state later
+        // set({ loading: false });
       }  
     },
     getTaskById: (id) => {
