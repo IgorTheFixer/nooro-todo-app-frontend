@@ -12,6 +12,8 @@ const config: Config = {
   		colors: {
         customBlue: '#4ea8de',
         customPurple: '#5E60CE',
+        appGray: '#1A1A1A',
+        headerBlack: '#0D0D0D',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -57,7 +59,10 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+      spacing: {
+        '50': '12.5rem' // Adding h-50 as 12.5rem (200px)
+      }      
   	}
   },
   plugins: [require("tailwindcss-animate")],
