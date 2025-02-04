@@ -12,12 +12,14 @@ interface TaskStore {
   deleteTask: ( taskId: string ) => void;
   fetchTasks: () => Promise<void>;
   getTaskById: (id: string) => Task | undefined;
+  setTasks: (tasks: Task[]) => void; 
 }
 
 export const useTaskStore = create(
   persist<TaskStore>(( set, get) =>({
     tasks: [],
     loading: true,
+    setTasks: (tasks) => set({ tasks }),
     addTask: (newTask) => {
       set((state) => ({
         tasks: [...state.tasks, newTask],
