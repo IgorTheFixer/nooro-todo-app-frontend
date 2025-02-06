@@ -1,13 +1,19 @@
 import { useTaskStore } from "@/hooks/useTaskStore";
-import { useEffect } from 'react' 
+import { useEffect, useState } from 'react' 
 import TaskCard from "@/components/custom/task-card";
+import { ReactSortable } from "react-sortablejs";
+import { Task } from "@/types";
 
 export const TasksContainer = () => {
-  const { tasks, loading, fetchTasks } = useTaskStore();
+  const { tasks, loading, fetchTasks, setTasks } = useTaskStore();
 
   useEffect(() => {
     if (tasks.length === 0) fetchTasks();
   }, [tasks.length, fetchTasks]);
+
+  const handleUpdateTasks = (newTasks:Task[]) => {
+    setTasks(newTasks); 
+  };
 
   return(
     <div className="
@@ -30,12 +36,14 @@ export const TasksContainer = () => {
           <p className="text-customGray pt-4">Create tasks and organize your to-do items</p>
         </>
       ) : (
-        tasks.map((task) => (
-          <TaskCard 
-            key={task.id} 
-            task={task} 
-          />
-        ))
+        <ReactSortable className="w-full h-full" list={tasks} setList={handleUpdateTasks}>
+            {tasks.map((task) => (
+              <TaskCard 
+                key={task.id} 
+                task={task} 
+              />
+            ))}
+        </ReactSortable>
       )}
     </div>
   )
